@@ -16,15 +16,41 @@ class ViewTests(unittest.TestCase):
             },
             'currencies':[
                 {'id':'RUR','rate':'CBFR'},
+                {'id':'USD','rate':'CBFR'},
             ],
             'categories': [
                 {'id':'1','name':u'АЛЛ Продуктс'},
                 {'id':'2','name':'sub cat products','parentId':'1'},
-            ]
+            ],
+            'offers':[
+                {
+                    'id':'1',
+                    'url':'http://mail.ru/1212',
+                    'price':'1234',
+                    'currencyId':'RUR',
+                    'categoryId':'1',
+                    'picture':'http://mail.ru/1212.jpg',
+                    'name':'product1',
+                    'vendor':'AND',
+                    'description':'some text here',
+                },
+                {
+                    'id':'2',
+                    'url':'http://mail.ru/1212',
+                    'price':'1234',
+                    'currencyId':'RUR',
+                    'categoryId':'2',
+                    'picture':'http://mail.ru/1212.jpg',
+                    'name':'product1',
+                    'vendor':'AND',
+                    'description':'some text here',
+                },
+            ],
         }
         obj.set_shop(data['shop'])
         obj.set_currencies(data['currencies'])
         obj.set_categories(data['categories'])
+        obj.set_offers(data['offers'])
 
         print obj.get_xml()
 

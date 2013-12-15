@@ -242,20 +242,20 @@ class YaYml(object):
     def get_xml(self):
         return HEADER+etree.tostring(self.root,encoding="windows-1251",pretty_print=True)
 
-    def set_shop(self,show_data):
-        shop = etree.SubElement(self.root, 'shop')
-        self.shop=shop
+    def set_shop(self,shop_data):
+        shop_tag = etree.SubElement(self.root, 'shop')
+        self.shop=shop_tag
         
         for key in SHOP_TAGS:
-            if key in show_data:
-                etree.SubElement(shop, key).text = show_data[key]
+            if key in shop_data:
+                etree.SubElement(shop_tag, key).text = shop_data[key]
 
     def set_currencies(self,currencies_data):
-        currencies = etree.SubElement(self.shop, 'currencies')
-        self.currencies=currencies
+        currencies_tag = etree.SubElement(self.shop, 'currencies')
+        self.currencies=currencies_tag
         for currency in currencies_data:
             #xxx check id, rate, plus
-            etree.SubElement(currencies, 'currency', rate=currency['rate'], id=currency['id'])
+            etree.SubElement(currencies_tag, 'currency', rate=currency['rate'], id=currency['id'])
 
     def set_categories(self, categories_data):
         categories_tag = etree.SubElement(self.shop, 'categories')
@@ -266,14 +266,10 @@ class YaYml(object):
                 etree.SubElement(categories_tag, 'category', id=category['id'], text = category['name'])
 
 
-    # def add_offers(self, shop):
-    #     offers = etree.SubElement(shop,'offers')
-    #     for product in Product.objects.filter(active=True):
-    #         offer = etree.SubElement(offers,'offer', id=str(product.id), available="true")
-    #         etree.SubElement(offer,'url').text =  YML_CONFIG['url'] + product.get_absolute_url()
-    #         etree.SubElement(offer,'price').text =  str(product.get_price())
-    #         etree.SubElement(offer,'currencyId').text =  product.get_currency()
-    #         etree.SubElement(offer,'categoryId').text =  str(product.category.id)
-    #         etree.SubElement(offer,'picture').text = YML_CONFIG['url'] + product.head_image.url
-    #         etree.SubElement(offer,'delivery').text = "true"
-    #         etree.SubElement(offer,'name').text = product.get_name()
+    def set_offers(self, offers_data):
+        offers_tag = etree.SubElement(self.shop,'offers')
+        for offer in offers_data:
+            offer_tag = etree.SubElement(offers_tag,'offer', id=offer['id'], available="true")
+            for key in OFFERS_TAGS['']:
+                if key in offer:
+                    etree.SubElement(offer_tag, key).text = offer[key]
