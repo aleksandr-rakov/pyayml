@@ -265,7 +265,6 @@ class YaYml(object):
             else:
                 etree.SubElement(categories_tag, 'category', id=category['id'], text = category['name'])
 
-
     def set_offers(self, offers_data):
         offers_tag = etree.SubElement(self.shop,'offers')
         for offer in offers_data:

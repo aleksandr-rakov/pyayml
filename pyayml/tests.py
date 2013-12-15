@@ -43,7 +43,13 @@ class ViewTests(unittest.TestCase):
                     'picture':'http://mail.ru/1212.jpg',
                     'name':'product1',
                     'vendor':'AND',
-                    'description':'some text here',
+                    'description':"""some text here
+                        '"': '&quot;',
+                        '&': '&amp;',
+                        '>': '&gt;',
+                        '<': '&lt;',
+                        "'": '&apos;',
+                    """,
                 },
             ],
         }
