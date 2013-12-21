@@ -15,8 +15,8 @@ class ViewTests(unittest.TestCase):
                 'url' : 'http://www.mail.ru',
             },
             'currencies':[
-                {'id':'RUR','rate':'CBFR'},
-                {'id':'USD','rate':'CBFR'},
+                {'id':'RUR','rate':'CBRF'},
+                {'id':'USD','rate':'CBRF'},
             ],
             'categories': [
                 {'id':'1','name':u'АЛЛ Продуктс'},

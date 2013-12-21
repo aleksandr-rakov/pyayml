@@ -240,7 +240,7 @@ class YaYml(object):
         self.root = etree.Element('yml_catalog', date=datetime.today().strftime("%Y-%m-%d %H:%M"))
 
     def get_xml(self):
-        return HEADER+etree.tostring(self.root,encoding="windows-1251",pretty_print=True)
+        return HEADER+etree.tostring(self.root,pretty_print=True).encode('windows-1251')
 
     def set_shop(self,shop_data):
         shop_tag = etree.SubElement(self.root, 'shop')
