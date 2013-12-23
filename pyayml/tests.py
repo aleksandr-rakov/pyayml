@@ -6,6 +6,7 @@ class ViewTests(unittest.TestCase):
     def setUp(self):
         pass
 
+    #http://softwaremaniacs.org/forum/python/25537/
     def test_001(self):
         obj=pyayml.YaYml()
         data={
@@ -35,13 +36,14 @@ class ViewTests(unittest.TestCase):
                     'description':'some text here',
                 },
                 {
+                    'type':"vendor.model",
                     'id':'2',
-                    'url':'http://mail.ru/1212',
+                    'url':'http://mail.ru/1212?ddd&c=d',
                     'price':'1234',
                     'currencyId':'RUR',
                     'categoryId':'2',
                     'picture':'http://mail.ru/1212.jpg',
-                    'name':'product1',
+                    'model':'product2',
                     'vendor':'AND',
                     'description':"""some text here
                         '"': '&quot;',

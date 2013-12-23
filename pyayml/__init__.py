@@ -9,7 +9,7 @@ REPLACEMENTS={
     '<': '&lt;',
     "'": '&apos;',
 }
-HEADER="""<?xml version="1.0" encoding="windows-1251"?>
+HEADER="""<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE yml_catalog SYSTEM "shops.dtd">
 """
 SHOP_TAGS=[
@@ -240,7 +240,7 @@ class YaYml(object):
         self.root = etree.Element('yml_catalog', date=datetime.today().strftime("%Y-%m-%d %H:%M"))
 
     def get_xml(self):
-        return HEADER+etree.tostring(self.root,pretty_print=True).encode('windows-1251')
+        return HEADER+etree.tostring(self.root,pretty_print=True)
 
     def set_shop(self,shop_data):
         shop_tag = etree.SubElement(self.root, 'shop')
@@ -255,7 +255,11 @@ class YaYml(object):
         self.currencies=currencies_tag
         for currency in currencies_data:
             #xxx check id, rate, plus
-            etree.SubElement(currencies_tag, 'currency', rate=currency['rate'], id=currency['id'])
+            if currency.get('plus'):
+                etree.SubElement(currencies_tag, 'currency', rate=currency['rate'], id=currency['id'], plus=currency['plus'])
+            else:
+                etree.SubElement(currencies_tag, 'currency', rate=currency['rate'], id=currency['id'])
+
 
     def set_categories(self, categories_data):
         categories_tag = etree.SubElement(self.shop, 'categories')
@@ -269,6 +273,6 @@ class YaYml(object):
         offers_tag = etree.SubElement(self.shop,'offers')
         for offer in offers_data:
             offer_tag = etree.SubElement(offers_tag,'offer', id=offer['id'], available="true")
-            for key in OFFERS_TAGS['']:
+            for key in OFFERS_TAGS[offer.get('type','')]:
                 if key in offer:
                     etree.SubElement(offer_tag, key).text = offer[key]
