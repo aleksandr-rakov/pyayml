@@ -276,3 +276,5 @@ class YaYml(object):
             for key in OFFERS_TAGS[offer.get('type','')]:
                 if key in offer:
                     etree.SubElement(offer_tag, key).text = offer[key]
+                    # from xml.sax.saxutils import unescape
+                    # etree.SubElement(offer_tag, key,text = unescape(offer[key]))

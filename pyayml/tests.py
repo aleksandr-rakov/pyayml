@@ -60,6 +60,9 @@ class ViewTests(unittest.TestCase):
         obj.set_categories(data['categories'])
         obj.set_offers(data['offers'])
 
-        print obj.get_xml()
+        #print obj.get_xml()
 
         #self.assertEqual(info['project'], 'pyayml')
+
+#https://wiki.python.org/moin/EscapingXml
+#https://wiki.python.org/moin/EscapingHtml
