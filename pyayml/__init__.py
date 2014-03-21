@@ -272,8 +272,12 @@ class YaYml(object):
     def set_offers(self, offers_data):
         offers_tag = etree.SubElement(self.shop,'offers')
         for offer in offers_data:
-            offer_tag = etree.SubElement(offers_tag,'offer', id=offer['id'], available="true")
-            for key in OFFERS_TAGS[offer.get('type','')]:
+            otype=offer.get('type','')
+            if otype:
+                offer_tag = etree.SubElement(offers_tag,'offer', id=offer['id'], available="true", type=otype)
+            else:
+                offer_tag = etree.SubElement(offers_tag,'offer', id=offer['id'], available="true")
+            for key in OFFERS_TAGS[otype]:
                 if key in offer:
                     etree.SubElement(offer_tag, key).text = offer[key]
                     # from xml.sax.saxutils import unescape
