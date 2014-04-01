@@ -265,9 +265,9 @@ class YaYml(object):
         categories_tag = etree.SubElement(self.shop, 'categories')
         for category in categories_data:
             if not category.get('parentId') is None:
-                etree.SubElement(categories_tag, 'category', id=category['id'], parentId=category['parentId'], text = category['name'])
+                etree.SubElement(categories_tag, 'category', id=category['id'], parentId=category['parentId']).text = category['name']
             else:
-                etree.SubElement(categories_tag, 'category', id=category['id'], text = category['name'])
+                etree.SubElement(categories_tag, 'category', id=category['id']).text = category['name']
 
     def set_offers(self, offers_data):
         offers_tag = etree.SubElement(self.shop,'offers')
@@ -280,5 +280,3 @@ class YaYml(object):
             for key in OFFERS_TAGS[otype]:
                 if key in offer:
                     etree.SubElement(offer_tag, key).text = offer[key]
-                    # from xml.sax.saxutils import unescape
-                    # etree.SubElement(offer_tag, key,text = unescape(offer[key]))
