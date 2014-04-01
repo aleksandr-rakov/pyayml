@@ -256,9 +256,9 @@ class YaYml(object):
         for currency in currencies_data:
             #xxx check id, rate, plus
             if currency.get('plus'):
-                etree.SubElement(currencies_tag, 'currency', rate=currency['rate'], id=currency['id'], plus=currency['plus'])
+                etree.SubElement(currencies_tag, 'currency', id=currency['id'], rate=currency['rate'], plus=currency['plus'])
             else:
-                etree.SubElement(currencies_tag, 'currency', rate=currency['rate'], id=currency['id'])
+                etree.SubElement(currencies_tag, 'currency', id=currency['id'], rate=currency['rate'])
 
 
     def set_categories(self, categories_data):
