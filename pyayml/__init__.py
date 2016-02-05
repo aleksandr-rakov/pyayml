@@ -279,4 +279,12 @@ class YaYml(object):
                 offer_tag = etree.SubElement(offers_tag,'offer', id=offer['id'], available="true")
             for key in OFFERS_TAGS[otype]:
                 if key in offer:
-                    etree.SubElement(offer_tag, key).text = offer[key]
+                    if isinstance(offer[key],list):
+                        for param in offer[key]:
+                            if isinstance(param,dict):
+                                kwargs=dict((k,v) for k,v in param.items() if not k.startswith('_'))
+                                etree.SubElement(offer_tag, key, **kwargs).text = param['_text']
+                            else:
+                                etree.SubElement(offer_tag, key).text = param
+                    else:
+                        etree.SubElement(offer_tag, key).text = offer[key]
