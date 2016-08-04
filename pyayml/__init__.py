@@ -273,10 +273,13 @@ class YaYml(object):
         offers_tag = etree.SubElement(self.shop,'offers')
         for offer in offers_data:
             otype=offer.get('type','')
+            available='true'
+            if '__available' in offer:
+                available=offer['__available'] and 'true' or 'false'
             if otype:
-                offer_tag = etree.SubElement(offers_tag,'offer', id=offer['id'], available="true", type=otype)
+                offer_tag = etree.SubElement(offers_tag,'offer', id=offer['id'], available=available, type=otype)
             else:
-                offer_tag = etree.SubElement(offers_tag,'offer', id=offer['id'], available="true")
+                offer_tag = etree.SubElement(offers_tag,'offer', id=offer['id'], available=available)
             for key in OFFERS_TAGS[otype]:
                 if key in offer:
                     if isinstance(offer[key],list):
