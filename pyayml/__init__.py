@@ -46,6 +46,7 @@ OFFERS_TAGS={
         'age',
         'barcode',
         'param',
+        'keywords'
     ],
     'vendor.model':[
         'url',
@@ -77,6 +78,7 @@ OFFERS_TAGS={
         'weight',
         'dimensions',
         'param',
+        'keywords'
     ],
     'book':[
         'url',
