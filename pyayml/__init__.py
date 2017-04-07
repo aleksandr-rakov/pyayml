@@ -292,4 +292,7 @@ class YaYml(object):
                             else:
                                 etree.SubElement(offer_tag, key).text = param
                     else:
-                        etree.SubElement(offer_tag, key).text = offer[key]
+                        if "__use_cdata_%s"%key in offer:
+                            etree.SubElement(offer_tag, key).text=etree.CDATA(offer[key])
+                        else:
+                            etree.SubElement(offer_tag, key).text = offer[key]
