@@ -243,7 +243,9 @@ class YaYml(object):
         return HEADER+etree.tostring(self.root, encoding='utf-8', pretty_print=True)
 
     def insert_delivery_options(self,parent,data):
-        etree.SubElement(parent, 'delivery-options', **data)
+        delivery_options_tag = etree.SubElement(parent,'delivery-options')
+        for opt in data:
+            etree.SubElement(delivery_options_tag, 'option', **opt)
 
     def set_shop(self,shop_data):
         shop_tag = etree.SubElement(self.root, 'shop')
