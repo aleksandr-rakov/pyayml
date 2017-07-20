@@ -21,7 +21,7 @@ SHOP_TAGS=[
     'agency',
     'email',
     'cpa',
-    'local_delivery_cost'
+    'delivery-options'
 ]
 OFFERS_TAGS={
     '':[
@@ -34,7 +34,7 @@ OFFERS_TAGS={
         'store',
         'pickup',
         'delivery',
-        'local_delivery_cost',
+        'delivery-options',
         'name',
         'vendor',
         'vendorCode',
@@ -57,7 +57,7 @@ OFFERS_TAGS={
         'store',
         'pickup',
         'delivery',
-        'local_delivery_cost',
+        'delivery-options',
         'typePrefix',
         'vendor',
         'vendorCode',
@@ -88,7 +88,7 @@ OFFERS_TAGS={
         'store',
         'pickup',
         'delivery',
-        'local_delivery_cost',
+        'delivery-options',
         'author',
         'name',
         'publisher',
@@ -242,13 +242,19 @@ class YaYml(object):
     def get_xml(self):
         return HEADER+etree.tostring(self.root, encoding='utf-8', pretty_print=True)
 
+    def insert_delivery_options(self,parent,data):
+        etree.SubElement(parent, 'delivery-options', **data)
+
     def set_shop(self,shop_data):
         shop_tag = etree.SubElement(self.root, 'shop')
         self.shop=shop_tag
         
         for key in SHOP_TAGS:
             if key in shop_data:
-                etree.SubElement(shop_tag, key).text = shop_data[key]
+                if key=='delivery-options':
+                    self.insert_delivery_options(shop_tag,shop_data[key])
+                else:
+                    etree.SubElement(shop_tag, key).text = shop_data[key]
 
     def set_currencies(self,currencies_data):
         currencies_tag = etree.SubElement(self.shop, 'currencies')
@@ -282,7 +288,9 @@ class YaYml(object):
                 offer_tag = etree.SubElement(offers_tag,'offer', id=offer['id'], available=available)
             for key in OFFERS_TAGS[otype]:
                 if key in offer:
-                    if isinstance(offer[key],list):
+                    if key=='delivery-options':
+                        self.insert_delivery_options(offer_tag,offer[key])
+                    elif isinstance(offer[key],list):
                         for param in offer[key]:
                             if isinstance(param,dict):
                                 kwargs=dict((k,v) for k,v in param.items() if not k.startswith('_'))
