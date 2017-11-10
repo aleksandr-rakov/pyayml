@@ -27,6 +27,7 @@ OFFERS_TAGS={
     '':[
         'url',
         'price',
+        'oldprice',
         'currencyId',
         'categoryId',
         'market_category',
@@ -50,6 +51,7 @@ OFFERS_TAGS={
     'vendor.model':[
         'url',
         'price',
+        'oldprice',
         'currencyId',
         'categoryId',
         'market_category',
@@ -81,6 +83,7 @@ OFFERS_TAGS={
     'book':[
         'url',
         'price',
+        'oldprice',
         'currencyId',
         'categoryId',
         'market_category',
@@ -108,6 +111,7 @@ OFFERS_TAGS={
     'audiobook':[
         'url',
         'price',
+        'oldprice',
         'currencyId',
         'categoryId',
         'market_category',
@@ -135,6 +139,7 @@ OFFERS_TAGS={
         #music
         'url',
         'price',
+        'oldprice',
         'currencyId',
         'categoryId',
         'market_category',
@@ -152,6 +157,7 @@ OFFERS_TAGS={
         #video
         # 'url',
         # 'price',
+        # 'oldprice',
         # 'currencyId',
         # 'categoryId',
         # 'market_category',
@@ -176,6 +182,7 @@ OFFERS_TAGS={
     'tour':[
         'url',
         'price',
+        'oldprice',
         'currencyId',
         'categoryId',
         'market_category',
@@ -200,6 +207,7 @@ OFFERS_TAGS={
     'event.ticket':[
         'url',
         'price',
+        'oldprice',
         'currencyId',
         'categoryId',
         'market_category',
