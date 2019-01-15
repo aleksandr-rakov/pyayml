@@ -21,7 +21,8 @@ SHOP_TAGS=[
     'agency',
     'email',
     'cpa',
-    'delivery-options'
+    'delivery-options',
+    'pickup-options',
 ]
 OFFERS_TAGS={
     '':[
@@ -36,6 +37,7 @@ OFFERS_TAGS={
         'pickup',
         'delivery',
         'delivery-options',
+        'pickup-options',
         'name',
         'vendor',
         'vendorCode',
@@ -60,6 +62,7 @@ OFFERS_TAGS={
         'pickup',
         'delivery',
         'delivery-options',
+        'pickup-options',
         'typePrefix',
         'vendor',
         'vendorCode',
@@ -92,6 +95,7 @@ OFFERS_TAGS={
         'pickup',
         'delivery',
         'delivery-options',
+        'pickup-options',
         'author',
         'name',
         'publisher',
@@ -255,6 +259,11 @@ class YaYml(object):
         for opt in data:
             etree.SubElement(delivery_options_tag, 'option', **opt)
 
+    def insert_pickup_options(self,parent,data):
+        pickup_options_tag = etree.SubElement(parent,'pickup-options')
+        for opt in data:
+            etree.SubElement(pickup_options_tag, 'option', **opt)
+
     def set_shop(self,shop_data):
         shop_tag = etree.SubElement(self.root, 'shop')
         self.shop=shop_tag
@@ -263,6 +272,8 @@ class YaYml(object):
             if key in shop_data:
                 if key=='delivery-options':
                     self.insert_delivery_options(shop_tag,shop_data[key])
+                elif key=='pickup-options':
+                    self.insert_pickup_options(shop_tag,shop_data[key])
                 else:
                     etree.SubElement(shop_tag, key).text = shop_data[key]
 
@@ -303,6 +314,8 @@ class YaYml(object):
                 if key in offer:
                     if key=='delivery-options':
                         self.insert_delivery_options(offer_tag,offer[key])
+                    elif key=='pickup-options':
+                        self.insert_pickup_options(offer_tag,offer[key])
                     elif isinstance(offer[key],list):
                         for param in offer[key]:
                             if isinstance(param,dict):
