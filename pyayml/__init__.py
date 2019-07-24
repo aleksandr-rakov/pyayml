@@ -328,3 +328,23 @@ class YaYml(object):
                             etree.SubElement(offer_tag, key).text=etree.CDATA(offer[key])
                         else:
                             etree.SubElement(offer_tag, key).text = offer[key]
+
+    def set_promos(self, promos_data):
+        if promos_data:
+            promos_tag = etree.SubElement(self.shop, 'promos')
+            for promo in promos_data:
+                promo_tag=etree.SubElement(promos_tag, 'promo', id=promo['id'], type=promo['type'])
+                for t in ('start-date','end-date','description','url','promo-code'):
+                    tval=promo.get(t)
+                    if tval:
+                        etree.SubElement(promo_tag, t).text=tval
+
+                kwargs={'unit': promo['unit']}
+                if promo['currency']:
+                    kwargs['currency']=promo['currency']
+                etree.SubElement(promo_tag, 'discount', **kwargs).text=promo['discount']
+
+                purchase_el=etree.SubElement(promo_tag, 'purchase')
+                for product in promo['products']:
+                    kvargs={'offer-id':product}
+                    etree.SubElement(purchase_el, 'product', **kvargs)
