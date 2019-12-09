@@ -49,7 +49,11 @@ OFFERS_TAGS={
         'age',
         'barcode',
         'param',
-        'keywords'
+        'keywords', #tiu
+        'weight', #ali
+        'Length', #ali
+        'Width', #ali
+        'Height', #ali
     ],
     'vendor.model':[
         'url',
@@ -83,7 +87,10 @@ OFFERS_TAGS={
         'weight',
         'dimensions',
         'param',
-        'keywords'
+        'keywords', #tiu
+        'Length', #ali
+        'Width', #ali
+        'Height', #ali
     ],
     'book':[
         'url',
@@ -313,6 +320,8 @@ class YaYml(object):
                 kwargs['selling_type']=offer['__selling_type']
             if otype:
                 kwargs['type']=otype
+            if '__group_id' in offer:
+                kwargs['group_id']=offer['__group_id']
                 
             offer_tag = etree.SubElement(offers_tag,'offer', **kwargs)
             for key in OFFERS_TAGS[otype]:
