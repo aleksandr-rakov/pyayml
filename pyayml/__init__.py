@@ -39,6 +39,7 @@ OFFERS_TAGS={
         'delivery-options',
         'pickup-options',
         'name',
+        'goodname', #ali
         'vendor',
         'vendorCode',
         'description',
@@ -72,6 +73,7 @@ OFFERS_TAGS={
         'vendor',
         'vendorCode',
         'model',
+        'goodname', #ali
         'description',
         'sales_notes',
         'manufacturer_warranty',
