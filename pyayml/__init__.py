@@ -55,6 +55,7 @@ OFFERS_TAGS={
         'Length', #ali
         'Width', #ali
         'Height', #ali
+        'quantity', #ali
     ],
     'vendor.model':[
         'url',
@@ -93,6 +94,7 @@ OFFERS_TAGS={
         'Length', #ali
         'Width', #ali
         'Height', #ali
+        'quantity', #ali
     ],
     'book':[
         'url',
